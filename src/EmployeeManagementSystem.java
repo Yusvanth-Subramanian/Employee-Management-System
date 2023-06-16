@@ -66,6 +66,7 @@ public class EmployeeManagementSystem {
                             exceptionOccured=true;
                         }
                         catch (Exception e) {
+                            exceptionOccured=true;
                             System.out.println("Retry with valid input.");
                         }
                         if(!exceptionOccured)
@@ -94,6 +95,7 @@ public class EmployeeManagementSystem {
                             exceptionOccured=true;
                         }
                         catch (Exception e) {
+                            exceptionOccured=true;
                             System.out.println("Retry with valid input.");
                         }
                         if(!exceptionOccured)
@@ -112,6 +114,7 @@ public class EmployeeManagementSystem {
                             exceptionOccured=true;
                         }
                         catch (Exception e) {
+                            exceptionOccured=true;
                             System.out.println("Retry with valid input.");
                         }
                         if(!exceptionOccured)

@@ -4,12 +4,13 @@ import DTO.AddEmployeeDTO;
 import Entity.Employee;
 import Exceptions.EmployeeAlreadyExistsException;
 import Exceptions.EmployeeNotFoundException;
+import Exceptions.NegativeSalaryException;
 
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
     @Override
-    public List<Employee> addEmployee(AddEmployeeDTO employeeDTO) throws EmployeeAlreadyExistsException {
+    public List<Employee> addEmployee(AddEmployeeDTO employeeDTO) throws EmployeeAlreadyExistsException, NegativeSalaryException {
         boolean employeeAlreadyExists = false;
         for(Employee employee:employeeDTO.getListOfEmployees()){
             if(employee.getEmployeeId()==employeeDTO.getEmployeeId()){
@@ -17,6 +18,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 throw new EmployeeAlreadyExistsException("Employee Already exists with the given id . ");
             }
         }
+        if(employeeDTO.getEmployeeSalary()<0)
+            throw new NegativeSalaryException("Salary cannot be in negative.");
         Employee employee = new Employee(employeeDTO.getEmployeeId(), employeeDTO.getEmployeeName(), employeeDTO.getEmployeeDesignation(),employeeDTO.getEmployeeSalary());
         List<Employee> newListOfEmployees = employeeDTO.getListOfEmployees();
         newListOfEmployees.add(employee);
@@ -39,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void updateEmployee(AddEmployeeDTO employeeDTO) throws EmployeeNotFoundException {
+    public void updateEmployee(AddEmployeeDTO employeeDTO) throws EmployeeNotFoundException, NegativeSalaryException {
 
 
         List<Employee> employeeList = employeeDTO.getListOfEmployees();
@@ -50,6 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 emp.setEmployeeName(employeeDTO.getEmployeeName());
                 emp.setEmployeeDesignation(employeeDTO.getEmployeeDesignation());
                 emp.setEmployeeSalary(employeeDTO.getEmployeeSalary());
+                if(emp.getEmployeeSalary()<0){
+                    throw new NegativeSalaryException("Salary Cannot be in negative .");
+                }
                 employee=emp;
                 break;
             }
