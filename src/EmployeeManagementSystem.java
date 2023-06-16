@@ -28,11 +28,15 @@ public class EmployeeManagementSystem {
 
             switch (choice){
                 case 1:
+
                     while(true){
                         boolean exceptionOccured=false;
                         try{
+
                             System.out.print("Enter Employee id (In Integer) : ");
-                            int empId = s.nextInt();
+
+                            int empId = Integer.parseInt(s.next());
+
                             System.out.print("Enter Employee Name : ");
                             String name = s.next();
                             s.nextLine();
@@ -48,6 +52,7 @@ public class EmployeeManagementSystem {
                         catch (Exception e){
                             exceptionOccured=true;
                             System.out.println("Enter valid details!!!");
+                            //break;
                         }
                         if(!exceptionOccured)
                             break;
